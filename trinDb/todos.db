@@ -1,0 +1,11 @@
+{"action":"create","data":{"task":"I love you","isDone":true,"_id":"b1f39a3b-a34e-4714-a1e8-427c545658eb"}}
+{"action":"create","data":{"task":"asdasdas","isDone":true,"_id":"2682c437-e76c-48e4-8013-8dad7286eab2"}}
+{"action":"create","data":{"task":"qeqwe","isDone":false,"_id":"4a072585-8966-4c1a-aa4a-2ef9106e0ca1"}}
+{"action":"patch","data":{"isDone":true,"_id":"2682c437-e76c-48e4-8013-8dad7286eab2"}}
+{"action":"patch","data":{"isDone":false,"_id":"2682c437-e76c-48e4-8013-8dad7286eab2"}}
+{"action":"patch","data":{"isDone":false,"_id":"b1f39a3b-a34e-4714-a1e8-427c545658eb"}}
+{"action":"patch","data":{"isDone":true,"_id":"2682c437-e76c-48e4-8013-8dad7286eab2"}}
+{"action":"patch","data":{"isDone":false,"_id":"2682c437-e76c-48e4-8013-8dad7286eab2"}}
+{"action":"patch","data":{"isDone":true,"_id":"b1f39a3b-a34e-4714-a1e8-427c545658eb"}}
+{"action":"patch","data":{"isDone":true,"_id":"2682c437-e76c-48e4-8013-8dad7286eab2"}}
+{"action":"patch","data":{"isDone":true,"_id":"4a072585-8966-4c1a-aa4a-2ef9106e0ca1"}}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
+    <script src="https://unpkg.com/real-share/client.js"></script>
+</head>
+<body x-data="TodoApp()" x-init="init"">
+    <h1>Todo</h1>
+    <div class="container gx-4 gy-4" >
+        <div class="row">
+            <input x-model="desc" type="text" class="form-control col">
+            <button class="btn btn-primary col" @click="add">Submit</button>
+        </div>
+    </div>
+    <div x-text="desc"></div>
+    
+    <ul class="list-group px-4">
+        <template x-for="(item, i) in todos" :key="item">
+            <li class="list-group-item">
+                <input class="form-check-input" type="checkbox" x-model="item.isDone" @change="update($event, i, item._id)">
+                <span x-text="item.task"></span>
+                <button class="btn btn-danger" @click="remove(i, item._id)">🗑️</button>
+            </li>
+        </template>
+    </ul>
+</body>
+<script>
+
+    function TodoApp () {
+        return {
+            async init () {
+                const { todoService } = await realShare('http://localhost:3000')
+                this.todoService = todoService
+                this.todos = await this.todoService.getAllTodos()
+            },
+            todoService: null,
+            todos: [],
+            desc: '',
+            async add () {
+                // this.todos.push({
+                //     task: this.desc,
+                //     isDone: false
+                // })
+                const addedItem = await this.todoService.add({
+                    task: this.desc,
+                    isDone: false
+                })
+                console.log(addedItem)
+                this.todos.push(addedItem)
+                this.desc = ''
+            },
+            async remove (i, id) {
+                await this.todoService.remove(id)
+                this.todos.splice(i, 1)
+            },
+            async update (e, i, id) {
+                console.log(i, e.currentTarget.checked)
+                await this.todoService.patch(id, {
+                    isDone: e.currentTarget.checked
+                })
+            }
+        }
+    }
+</script>
+</html>
